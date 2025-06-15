@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="post-title">포스트 제목</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-link">← 블로그 홈으로</a>
+            <h1 id="blog-title">내 노션 블로그</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="loading" class="loading">
+            <p>포스트를 불러오는 중...</p>
+        </div>
+
+        <article id="post-content" class="post-article" style="display: none;">
+            <header class="post-header">
+                <h1 id="post-title-main"></h1>
+                <div class="post-meta">
+                    <span id="post-date"></span>
+                    <div id="post-tags" class="tags"></div>
+                </div>
+            </header>
+            
+            <div id="post-body" class="post-body">
+                <!-- 포스트 내용이 여기에 표시됩니다 -->
+            </div>
+        </article>
+
+        <div id="error" class="error" style="display: none;">
+            <p>포스트를 찾을 수 없습니다.</p>
+            <a href="index.html">블로그 홈으로 돌아가기</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 내 노션 블로그. Made with Notion API</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // URL에서 포스트 ID 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+        
+        if (postId) {
+            loadPost(postId);
+        } else {
+            showError();
+        }
+    </script>
+</body>
+</html>

@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>내 노션 블로그</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
+    <header>
+        <div class="container">
+            <h1>내 노션 블로그</h1>
+            <p>노션으로 관리하는 개인 블로그</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="loading" class="loading">
+            <p>블로그 포스트를 불러오는 중...</p>
+        </div>
+        
+        <div id="posts-container" class="posts-grid" style="display: none;">
+            <!-- 여기에 블로그 포스트들이 동적으로 추가됩니다 -->
+        </div>
+
+        <div id="error" class="error" style="display: none;">
+            <p>포스트를 불러올 수 없습니다. 나중에 다시 시도해주세요.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 내 노션 블로그. Made with Notion API</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
