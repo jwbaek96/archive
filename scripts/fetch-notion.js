@@ -13,6 +13,8 @@ const databaseId = process.env.NOTION_DATABASE_ID;
 async function fetchNotionData() {
     try {
         console.log('Fetching data from Notion...');
+        console.log('Database ID:', databaseId);
+        console.log('API Key exists:', !!process.env.NOTION_API_KEY);
         
         // 노션 데이터베이스에서 데이터 가져오기 (필터 없이 먼저 테스트)
         const response = await notion.databases.query({
@@ -25,10 +27,14 @@ async function fetchNotionData() {
             ]
         });
 
+        console.log('Raw response from Notion:', JSON.stringify(response, null, 2));
+
         // 데이터 변환
         const posts = response.results.map(page => {
             console.log('Processing page:', page.id);
-            return {
+            console.log('Page properties:', Object.keys(page.properties));
+            
+            const post = {
                 id: page.id,
                 title: getPlainText(page.properties.title),
                 content: getPlainText(page.properties.description),
@@ -37,7 +43,12 @@ async function fetchNotionData() {
                 tags: page.properties.tags?.multi_select?.map(tag => tag.name) || [],
                 published: page.properties.Published?.checkbox || false
             };
+            
+            console.log('Processed post:', post);
+            return post;
         });
+
+        console.log(`Total posts processed: ${posts.length}`);
 
         // data 폴더가 없으면 생성
         const dataDir = path.join(__dirname, '..', 'data');
@@ -58,9 +69,21 @@ async function fetchNotionData() {
 }
 
 // 텍스트 추출 함수
-function getPlainText(richText) {
-    if (!richText || !richText.title) return '';
-    return richText.title.map(text => text.plain_text).join('');
+function getPlainText(property) {
+    if (!property) return '';
+    
+    // Title 속성인 경우
+    if (property.title) {
+        return property.title.map(text => text.plain_text).join('');
+    }
+    
+    // Rich Text 속성인 경우
+    if (property.rich_text) {
+        return property.rich_text.map(text => text.plain_text).join('');
+    }
+    
+    // 기타 경우
+    return '';
 }
 
 // 실행
