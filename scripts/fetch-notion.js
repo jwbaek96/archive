@@ -16,9 +16,10 @@ async function fetchNotionData() {
         console.log('Database ID:', databaseId);
         console.log('API Key exists:', !!process.env.NOTION_API_KEY);
         
-        // 노션 데이터베이스에서 데이터 가져오기 (필터 없이 먼저 테스트)
+        // 노션 데이터베이스에서 데이터 가져오기
         const response = await notion.databases.query({
             database_id: databaseId,
+            // Published 필터 제거 - 모든 포스트 가져오기
             sorts: [
                 {
                     property: 'date',
@@ -28,20 +29,48 @@ async function fetchNotionData() {
         });
 
         console.log('Raw response from Notion:', JSON.stringify(response, null, 2));
+        
+        // 첫 번째 페이지의 속성들을 자세히 확인
+        if (response.results.length > 0) {
+            console.log('First page properties:');
+            Object.entries(response.results[0].properties).forEach(([key, value]) => {
+                console.log(`  ${key}:`, value);
+            });
+        }
 
         // 데이터 변환
         const posts = response.results.map(page => {
             console.log('Processing page:', page.id);
             console.log('Page properties:', Object.keys(page.properties));
             
+            // Published 속성 디버깅
+            console.log('Published property:', page.properties.Published);
+            console.log('published property:', page.properties.published);
+            
+            // 카테고리 속성 디버깅
+            const categoryProperty = page.properties.category || page.properties.Category || page.properties['카테고리'];
+            console.log('Category property:', categoryProperty);
+            
+            let category = '';
+            if (categoryProperty) {
+                if (categoryProperty.select) {
+                    // 단일 선택인 경우
+                    category = categoryProperty.select.name || '';
+                } else if (categoryProperty.multi_select) {
+                    // 다중 선택인 경우
+                    category = categoryProperty.multi_select.map(cat => cat.name).join(', ') || '';
+                }
+            }
+            console.log('Processed category:', category);
+            
             const post = {
                 id: page.id,
-                title: getPlainText(page.properties.title),
-                content: getPlainText(page.properties.description),
-                date: page.properties.date?.date?.start || '',
-                category: page.properties.category?.select?.map(category => category.name) || '',
-                tags: page.properties.tags?.multi_select?.map(tag => tag.name) || [],
-                published: page.properties.published?.checkbox || false
+                title: getPlainText(page.properties.title || page.properties.Title || page.properties['제목']),
+                content: getPlainText(page.properties.description || page.properties.Description || page.properties['설명']),
+                date: (page.properties.date || page.properties.Date || page.properties['날짜'])?.date?.start || '',
+                category: category,
+                tags: (page.properties.tags || page.properties.Tags || page.properties['태그'])?.multi_select?.map(tag => tag.name) || [],
+                published: (page.properties.Published || page.properties.published || page.properties['공개여부'])?.checkbox || false
             };
             
             console.log('Processed post:', post);
