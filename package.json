@@ -1,0 +1,14 @@
+{
+  "name": "notion-blog",
+  "version": "1.0.0",
+  "description": "Notion blog with GitHub Pages",
+  "main": "index.js",
+  "scripts": {
+    "fetch-notion": "node scripts/fetch-notion.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
