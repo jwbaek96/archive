@@ -39,7 +39,7 @@ async function fetchNotionData() {
                 title: getPlainText(page.properties.title),
                 content: getPlainText(page.properties.description),
                 date: page.properties.date?.date?.start || '',
-                category: page.properties.category?.select?.name || '',
+                category: page.properties.category?.select?.map(category => category.name) || '',
                 tags: page.properties.tags?.multi_select?.map(tag => tag.name) || [],
                 published: page.properties.published?.checkbox || false
             };
