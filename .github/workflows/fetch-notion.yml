@@ -1,77 +1,41 @@
 name: Fetch Notion Data
 
-# 트리거 설정
 on:
-  # 매일 오전 9시(UTC 기준, 한국시간 오후 6시)에 자동 실행
   schedule:
-    - cron: '0 9 * * *'
-  
-  # 수동 실행 가능
-  workflow_dispatch:
-  
-  # 메인 브랜치에 push할 때 실행
-  push:
-    branches: [ main ]
-    paths:
-      - 'scripts/**'
-      - '.github/workflows/**'
+    - cron: '0 */6 * * *'  # 6시간마다 실행
+  workflow_dispatch:  # 수동 실행 가능
+
+permissions:
+  contents: write  # 파일 쓰기 권한
+  pages: write     # GitHub Pages 권한
+  id-token: write  # 토큰 권한
 
 jobs:
-  fetch-and-deploy:
+  fetch-notion:
     runs-on: ubuntu-latest
     
     steps:
-    # 1. 저장소 체크아웃
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-    
-    # 2. Node.js 설정
+      
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-    
-    # 3. 의존성 설치
+        
     - name: Install dependencies
-      run: |
-        npm init -y
-        npm install node-fetch
-    
-    # 4. 노션 데이터 가져오기
+      run: npm install
+      
     - name: Fetch Notion data
       env:
         NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
         NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-      run: |
-        node scripts/fetch-notion.js
-    
-    # 5. 변경사항 확인 및 커밋
-    - name: Check for changes
-      id: verify-changed-files
-      run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
-    
-    # 6. 변경사항이 있을 때만 커밋 및 푸시
+      run: node scripts/fetch-notion.js
+      
     - name: Commit and push changes
-      if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add data/posts.json
-        git commit -m "🤖 Update blog posts from Notion [$(date '+%Y-%m-%d %H:%M:%S')]"
+        git diff --staged --quiet || git commit -m "Update blog posts from Notion [$(date '+%Y-%m-%d %H:%M:%S')]"
         git push
-    
-    # 7. 결과 출력
-    - name: Output result
-      run: |
-        if [ "${{ steps.verify-changed-files.outputs.changed }}" == "true" ]; then
-          echo "✅ 블로그 포스트가 업데이트되었습니다!"
-        else
-          echo "ℹ️ 변경사항이 없습니다."
-        fi
