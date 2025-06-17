@@ -1,21 +1,35 @@
-{
-  "lastUpdated": "2025-06-15T10:00:00.000Z",
-  "posts": [
-    {
-      "id": "sample-post-1",
-      "title": "내 첫 번째 노션 블로그 포스트",
-      "date": "2025-06-15",
-      "tags": ["블로그", "노션", "시작"],
-      "published": true,
-      "content": "안녕하세요! 노션을 CMS로 사용하는 블로그에 오신 것을 환영합니다.\n\n## 노션 블로그의 장점\n\n노션을 블로그 CMS로 사용하면 다음과 같은 장점이 있습니다:\n\n• **간편한 글 작성**: 노션의 직관적인 에디터 사용\n• **자동 배포**: GitHub Actions를 통한 자동 업데이트\n• **무료 호스팅**: GitHub Pages 무료 사용\n\n## 앞으로의 계획\n\n앞으로 이 블로그에서 다룰 주제들:\n\n1. 웹 개발 팁\n2. JavaScript 튜토리얼\n3. 개인 프로젝트 소개\n\n**즐거운 블로그 생활**을 시작해보세요!"
-    },
-    {
-      "id": "sample-post-2",
-      "title": "GitHub Actions로 자동화하기",
-      "date": "2025-06-14",
-      "tags": ["GitHub", "자동화", "CI/CD"],
-      "published": true,
-      "content": "GitHub Actions를 사용하면 노션에서 글을 작성하자마자 자동으로 블로그에 반영됩니다.\n\n## 작동 원리\n\n1. 노션에서 글 작성 후 `Published` 체크박스 체크\n2. GitHub Actions가 매일 자동 실행\n3. 노션 API를 통해 새 글 확인\n4. 변경사항이 있으면 자동으로 사이트 업데이트\n\n이렇게 간단하게 블로그를 운영할 수 있습니다!\n\n`코드 블록`도 잘 표시되고, **볼드 텍스트**와 *이탤릭 텍스트*도 지원합니다."
-    }
-  ]
-}
+[
+  {
+    "id": "21356570-5fe0-80f3-b003-d8a9a37aca1a",
+    "title": "테스트 포스팅 1",
+    "content": "테스트 디스크립션 1",
+    "date": "2025-06-15",
+    "category": "",
+    "tags": [
+      "Touchdesigner"
+    ],
+    "published": false
+  },
+  {
+    "id": "21356570-5fe0-8098-a0fb-cda52830598c",
+    "title": "테스트 포스팅 2",
+    "content": "테스트 디스크립션 2",
+    "date": "2025-06-14",
+    "category": "",
+    "tags": [
+      "UnrealEngine"
+    ],
+    "published": false
+  },
+  {
+    "id": "21356570-5fe0-8025-ad97-e6cd1252cb74",
+    "title": "테스트 포스팅 3",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "",
+    "tags": [
+      "Reaper"
+    ],
+    "published": false
+  }
+]
