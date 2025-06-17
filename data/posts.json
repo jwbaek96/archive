@@ -4,20 +4,75 @@
     "title": "테스트 포스팅 1",
     "content": "테스트 디스크립션 1",
     "date": "2025-06-15",
-    "category": "",
+    "category": "블로그",
     "tags": [
       "Touchdesigner"
     ],
-    "published": true
+    "published": false
   },
   {
     "id": "21356570-5fe0-8098-a0fb-cda52830598c",
     "title": "테스트 포스팅 2",
     "content": "테스트 디스크립션 2",
     "date": "2025-06-14",
-    "category": "",
+    "category": "블로그",
     "tags": [
       "UnrealEngine"
+    ],
+    "published": false
+  },
+  {
+    "id": "21556570-5fe0-80c8-a737-e4c26dab2fb6",
+    "title": "테스트 포스팅 3 (5)",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "블로그",
+    "tags": [
+      "Reaper"
+    ],
+    "published": false
+  },
+  {
+    "id": "21556570-5fe0-8071-8a58-c5906de78e46",
+    "title": "테스트 포스팅 3 (4)",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "블로그",
+    "tags": [
+      "Reaper"
+    ],
+    "published": false
+  },
+  {
+    "id": "21556570-5fe0-808a-a90f-f56f992010c3",
+    "title": "테스트 포스팅 3 (3)",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "블로그",
+    "tags": [
+      "Reaper"
+    ],
+    "published": false
+  },
+  {
+    "id": "21556570-5fe0-801e-939f-c38213837a48",
+    "title": "테스트 포스팅 3 (2)",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "블로그",
+    "tags": [
+      "Reaper"
+    ],
+    "published": false
+  },
+  {
+    "id": "21556570-5fe0-8078-aef1-c0d4d8297352",
+    "title": "테스트 포스팅 3 (1)",
+    "content": "테스트 디스크립션 3",
+    "date": "2025-06-13",
+    "category": "블로그",
+    "tags": [
+      "Reaper"
     ],
     "published": false
   },
@@ -26,7 +81,7 @@
     "title": "테스트 포스팅 3",
     "content": "테스트 디스크립션 3",
     "date": "2025-06-13",
-    "category": "",
+    "category": "블로그",
     "tags": [
       "Reaper"
     ],
