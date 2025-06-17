@@ -41,7 +41,7 @@ async function fetchNotionData() {
                 date: page.properties.date?.date?.start || '',
                 category: page.properties.category?.select?.name || '',
                 tags: page.properties.tags?.multi_select?.map(tag => tag.name) || [],
-                published: page.properties.Published?.checkbox || false
+                published: page.properties.published?.checkbox || false
             };
             
             console.log('Processed post:', post);
