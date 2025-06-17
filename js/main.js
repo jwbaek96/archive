@@ -15,7 +15,7 @@ async function loadPosts() {
         showLoading();
         
         // data/posts.json 파일에서 포스트 데이터 불러오기
-        const response = await fetch('data/posts.json');
+        const response = await fetch('./data/posts.json');
         
         if (!response.ok) {
             throw new Error('포스트 데이터를 불러올 수 없습니다.');
