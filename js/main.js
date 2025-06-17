@@ -15,7 +15,7 @@ async function loadPosts() {
         showLoading();
         
         // data/posts.json 파일에서 포스트 데이터 불러오기
-        const response = await fetch('./data/posts.json');
+        const response = await fetch('../data/posts.json');
         
         if (!response.ok) {
             throw new Error('포스트 데이터를 불러올 수 없습니다.');
@@ -26,7 +26,7 @@ async function loadPosts() {
         
         // 공개된 포스트만 필터링하고 날짜순으로 정렬
         const publishedPosts = postsData
-            .filter(post => post.published)
+            // .filter(post => post.published)
             .sort((a, b) => new Date(b.date) - new Date(a.date));
         
         if (publishedPosts.length === 0) {
