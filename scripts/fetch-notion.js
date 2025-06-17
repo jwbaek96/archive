@@ -19,7 +19,7 @@ async function fetchNotionData() {
             database_id: databaseId,
             sorts: [
                 {
-                    property: 'Date',
+                    property: 'date',
                     direction: 'descending'
                 }
             ]
@@ -30,10 +30,11 @@ async function fetchNotionData() {
             console.log('Processing page:', page.id);
             return {
                 id: page.id,
-                title: getPlainText(page.properties.Title || page.properties.Name),
-                content: getPlainText(page.properties.Content),
-                date: page.properties.Date?.date?.start || page.properties.Created?.date?.start || '',
-                tags: page.properties.Tags?.multi_select?.map(tag => tag.name) || [],
+                title: getPlainText(page.properties.title),
+                content: getPlainText(page.properties.description),
+                date: page.properties.date?.date?.start || '',
+                category: page.properties.category?.select?.name || '',
+                tags: page.properties.tags?.multi_select?.map(tag => tag.name) || [],
                 published: page.properties.Published?.checkbox || false
             };
         });
