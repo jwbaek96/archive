@@ -32,9 +32,14 @@ async function fetchNotionData() {
         
         // 첫 번째 페이지의 속성들을 자세히 확인
         if (response.results.length > 0) {
-            console.log('First page properties:');
+            console.log('=== 모든 속성 이름과 값 확인 ===');
             Object.entries(response.results[0].properties).forEach(([key, value]) => {
-                console.log(`  ${key}:`, value);
+                console.log(`속성명: "${key}"`);
+                console.log(`속성타입: ${value.type}`);
+                if (value.type === 'checkbox') {
+                    console.log(`체크박스값: ${value.checkbox}`);
+                }
+                console.log('---');
             });
         }
 
@@ -43,9 +48,28 @@ async function fetchNotionData() {
             console.log('Processing page:', page.id);
             console.log('Page properties:', Object.keys(page.properties));
             
-            // Published 속성 디버깅
-            console.log('Published property:', page.properties.Published);
-            console.log('published property:', page.properties.published);
+            // Published 속성을 동적으로 찾기
+            let publishedValue = false;
+            const publishedCandidates = ['Published', 'published', '공개여부', 'publish', 'Publish'];
+            
+            // 먼저 후보 이름들로 시도
+            for (const candidate of publishedCandidates) {
+                if (page.properties[candidate] && page.properties[candidate].type === 'checkbox') {
+                    publishedValue = page.properties[candidate].checkbox;
+                    console.log(`Found published property: "${candidate}" = ${publishedValue}`);
+                    break;
+                }
+            }
+            
+            // 후보에서 못 찾았으면 모든 체크박스 속성 확인
+            if (!publishedValue) {
+                Object.entries(page.properties).forEach(([key, value]) => {
+                    if (value.type === 'checkbox' && value.checkbox === true) {
+                        console.log(`Found checked checkbox: "${key}" = ${value.checkbox}`);
+                        publishedValue = value.checkbox;
+                    }
+                });
+            }
             
             // 카테고리 속성 디버깅
             const categoryProperty = page.properties.category || page.properties.Category || page.properties['카테고리'];
@@ -70,7 +94,7 @@ async function fetchNotionData() {
                 date: (page.properties.date || page.properties.Date || page.properties['날짜'])?.date?.start || '',
                 category: category,
                 tags: (page.properties.tags || page.properties.Tags || page.properties['태그'])?.multi_select?.map(tag => tag.name) || [],
-                published: (page.properties.Published || page.properties.published || page.properties['공개여부'])?.checkbox || false
+                published: publishedValue
             };
             
             console.log('Processed post:', post);
