@@ -32,6 +32,10 @@ jobs:
         NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
       run: node scripts/fetch-notion.js
       
+    - name: Pull latest changes
+      run: |
+        git pull origin main --rebase
+
     - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
