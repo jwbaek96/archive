@@ -126,21 +126,77 @@ async function fetchNotionData() {
     }
 }
 
-// 텍스트 추출 함수
+// 블록을 텍스트로 변환하는 함수
+function blockToText(block) {
+    const type = block.type;
+    
+    switch (type) {
+        case 'paragraph':
+            return block.paragraph.rich_text.map(text => text.plain_text).join('');
+            
+        case 'heading_1':
+            const h1Text = block.heading_1.rich_text.map(text => text.plain_text).join('');
+            return `# ${h1Text}`;
+            
+        case 'heading_2':
+            const h2Text = block.heading_2.rich_text.map(text => text.plain_text).join('');
+            return `## ${h2Text}`;
+            
+        case 'heading_3':
+            const h3Text = block.heading_3.rich_text.map(text => text.plain_text).join('');
+            return `### ${h3Text}`;
+            
+        case 'bulleted_list_item':
+            const bulletText = block.bulleted_list_item.rich_text.map(text => text.plain_text).join('');
+            return `• ${bulletText}`;
+            
+        case 'numbered_list_item':
+            const numberedText = block.numbered_list_item.rich_text.map(text => text.plain_text).join('');
+            return `1. ${numberedText}`;
+            
+        case 'code':
+            const codeText = block.code.rich_text.map(text => text.plain_text).join('');
+            return `\`\`\`\n${codeText}\n\`\`\``;
+            
+        case 'quote':
+            const quoteText = block.quote.rich_text.map(text => text.plain_text).join('');
+            return `> ${quoteText}`;
+            
+        case 'divider':
+            return '---';
+            
+        default:
+            // 알 수 없는 블록 타입의 경우
+            console.log(`Unknown block type: ${type}`, block);
+            return '';
+    }
+}
+
+// 텍스트 추출 함수 (개선된 버전)
 function getPlainText(property) {
-    if (!property) return '';
+    if (!property) {
+        console.log('속성이 없습니다.');
+        return '';
+    }
+    
+    console.log('속성 구조:', JSON.stringify(property, null, 2));
     
     // Title 속성인 경우
-    if (property.title) {
-        return property.title.map(text => text.plain_text).join('');
+    if (property.title && Array.isArray(property.title)) {
+        const text = property.title.map(text => text.plain_text || '').join('');
+        console.log('Title에서 추출된 텍스트:', text);
+        return text;
     }
     
     // Rich Text 속성인 경우
-    if (property.rich_text) {
-        return property.rich_text.map(text => text.plain_text).join('');
+    if (property.rich_text && Array.isArray(property.rich_text)) {
+        const text = property.rich_text.map(text => text.plain_text || '').join('');
+        console.log('Rich Text에서 추출된 텍스트:', text);
+        return text;
     }
     
     // 기타 경우
+    console.log('알 수 없는 속성 타입');
     return '';
 }
 
