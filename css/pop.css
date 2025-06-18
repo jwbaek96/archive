@@ -17,7 +17,7 @@
     gap: 5px;
 
     overflow: hidden;
-    background: url(./assets/bg.png) no-repeat center center fixed;
+    background: url(/assets/background.png) no-repeat center center fixed;
     background-size: auto;
     /* background-color: #f6f6f60a; */
     backdrop-filter: blur(4px);

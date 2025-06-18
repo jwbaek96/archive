@@ -14,8 +14,19 @@ async function loadPosts() {
     try {
         showLoading();
         
-        // 경로 수정: 상대 경로 통일
-        const response = await fetch('data/posts.json');
+        // GitHub Pages 환경을 고려한 경로 설정
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        const basePath = isGitHubPages ? window.location.pathname.replace('/index.html', '').replace('/', '') : '';
+        const jsonPath = basePath ? `${basePath}/data/posts.json` : 'data/posts.json';
+        
+        console.log('=== 경로 디버깅 ===');
+        console.log('현재 hostname:', window.location.hostname);
+        console.log('현재 pathname:', window.location.pathname);
+        console.log('GitHub Pages 환경:', isGitHubPages);
+        console.log('JSON 파일 경로:', jsonPath);
+        
+        // 경로 수정: GitHub Pages 환경 고려
+        const response = await fetch(jsonPath);
         
         if (!response.ok) {
             throw new Error('포스트 데이터를 불러올 수 없습니다.');
@@ -134,7 +145,14 @@ async function loadPost(postId) {
         console.log('=== 포스트 로딩 시작 ===');
         console.log('요청된 포스트 ID:', postId);
         
-        const response = await fetch('data/posts.json');
+        // GitHub Pages 환경을 고려한 경로 설정
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        const basePath = isGitHubPages ? window.location.pathname.replace('/post.html', '').replace('/', '') : '';
+        const jsonPath = basePath ? `${basePath}/data/posts.json` : 'data/posts.json';
+        
+        console.log('JSON 파일 경로:', jsonPath);
+        
+        const response = await fetch(jsonPath);
         if (!response.ok) {
             throw new Error('포스트 데이터를 불러올 수 없습니다.');
         }
