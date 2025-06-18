@@ -1,111 +1,30 @@
 {
-  "lastUpdated": "2025-06-18T18:13:41.635Z",
+  "lastUpdated": "2025-06-18T20:14:53.544Z",
   "posts": [
+    {
+      "id": "21556570-5fe0-8078-aef1-c0d4d8297352",
+      "title": "터치디자이너 어쩌고 저쩌고",
+      "description": "",
+      "date": "2025-06-19",
+      "category": "Blog",
+      "tags": [
+        "Touchdesigner",
+        "Instagram"
+      ],
+      "published": false,
+      "content": "오늘 터디 작업물 예쁘게 나온거 있어서 인스타에 릴스로 올렸거든.\n\n근데 이상하게 프레임이 떨어지더라.\n\n처음 딱 올렸을 때는 괜찮은데, 나중에 다시 보면 프레임드랍이 생김.\n\n웃긴건 인스타 스토리에서는 드랍 없이 잘 나오더라고ㅋㅋ"
+    },
     {
       "id": "21356570-5fe0-80f3-b003-d8a9a37aca1a",
       "title": "테스트 포스팅 1",
       "description": "테스트 디스크립션 1",
       "date": "2025-06-15",
-      "category": "블로그",
+      "category": "Blog",
       "tags": [
         "Touchdesigner"
       ],
       "published": false,
-      "content": "테스트 내용 이러쿵저러쿵\n\n![](https://prod-files-secure.s3.us-west-2.amazonaws.com/77856570-5fe0-814f-8736-0003b9bd3f32/58d3cb67-c724-45b7-8909-66e4b522a495/pexels-pixabay-315998.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466VSAWLSQM%2F20250618%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250618T181337Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFxSYKSfe8t18wivPnYCnn6AVi2GXkM5ThrH448z3WkxAiEAsSOPiRuu2Q6NFmlJodwM7gkqeLA9OWpsCu21OPkCdhIqiAQIkv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDNxyTVkIIzTNNh0YxyrcA1i5T23EuNzAVMdLmfVRP3yWrC9bMitOW%2FiPu5TQaVSXPzjxE%2FaEngRQUDVIvjLq9Xv9d%2B0Zy8eSJ54osw5I1DUOxa6I6HxIDIbLMytKX6gbUr0AlsZoGwdWN9ArtWSDr%2FOGHHo8XfRaa6ejbs7CVf9p7yba%2FmQpZmcUds%2FBByxDwkcJKg6E8rSk4ecFT9NrsYTYIUkPlw4XaernVlQNSfP6p%2F2z3D6fJpw2EcytHkyQsMqZeiOp3E9jl7AsSetbhQJVZS%2BLCrWNbbmWdvEA5vo9tebkGY4xXXF%2BM57VVFYj%2BzLvYJP9mpGuehT14QJE84tybGX7gKIEbfh8lDWliIlcFJDy0QS6ISoke74TJ8kU%2BKxNijKemvbHi3q4gIY2rl4qyflxUk%2FU8fqACKMdCncqzBFjQMmNnrSVLmGHmehv%2FdoKvLUKmh44iZnCDyTYNPi%2BwVjNbVpxeCo7fj1RDwvFyARnvnk0D7125di1oEMVe%2B8mzu90StL4AHtJFnjqLWd4RJ5c0NLgS1hYNbas6u3iphxNZcy%2BU%2BsVBRv7yAP2CluLrQTYjA5BQCU7Xp5DbOWbuzHp8IqtsULeQmxwz76iI3XKEl3EpFA2pCNVClSbf%2FnyZsBa2FAUiMgZMP3cy8IGOqUBrwISSkCd2xoaVa0LmbfbS4v%2BWQAzVF5lgoq3bqdhYyrMqfV62P6tZHRR2yq%2B2gSrxl%2BNGAP3fdBX5mjoYHdnNxlN5FTwAS0uejBqC5khHLuitcxNEyX8v9uwVCV%2FNNeVrLqFjXJ9ecEzNkcLP6wts0X7ruAcczjIaGpg82NnfA2XoftZBPoztrdIektEe%2BzRKCXOloiWhjGIHuqyXJuims4cFLUq&X-Amz-Signature=d8ea04aa858a73e613c5f4109bd43ace58eb657e5d97f141e1231348f649d658&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)\n\nㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㄹ"
-    },
-    {
-      "id": "21356570-5fe0-8098-a0fb-cda52830598c",
-      "title": "테스트 포스팅 2",
-      "description": "테스트 디스크립션 2",
-      "date": "2025-06-14",
-      "category": "블로그",
-      "tags": [
-        "UnrealEngine"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21556570-5fe0-80c8-a737-e4c26dab2fb6",
-      "title": "테스트 포스팅 3 (5)",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21556570-5fe0-8071-8a58-c5906de78e46",
-      "title": "테스트 포스팅 3 (4)",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21556570-5fe0-808a-a90f-f56f992010c3",
-      "title": "테스트 포스팅 3 (3)",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21556570-5fe0-801e-939f-c38213837a48",
-      "title": "테스트 포스팅 3 (2)",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21556570-5fe0-8078-aef1-c0d4d8297352",
-      "title": "테스트 포스팅 3 (1)",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21356570-5fe0-8025-ad97-e6cd1252cb74",
-      "title": "테스트 포스팅 3",
-      "description": "테스트 디스크립션 3",
-      "date": "2025-06-13",
-      "category": "블로그",
-      "tags": [
-        "Reaper"
-      ],
-      "published": false,
-      "content": ""
-    },
-    {
-      "id": "21656570-5fe0-805d-afb3-e3289c29310a",
-      "title": "",
-      "description": "",
-      "date": "",
-      "category": "",
-      "tags": [],
-      "published": false,
-      "content": ""
+      "content": "테스트 내용 이러쿵저러쿵\n\n![](https://prod-files-secure.s3.us-west-2.amazonaws.com/77856570-5fe0-814f-8736-0003b9bd3f32/58d3cb67-c724-45b7-8909-66e4b522a495/pexels-pixabay-315998.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4666MHNV42S%2F20250618%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250618T201453Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGOU7%2BWBvvOAQJftg8P%2FupKEbvB0oCEJwMgPwEEepJxhAiEA4dsyrAzWqjsArXUMY96YiBVLg5YdHW4t%2FdFTzA10xeIqiAQIlf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDHHwYuSz2XhD4oSs9yrcA0G1xFnvNtexZHvB0yzHJW2RkNpiocoQRdtPUZ3fgVAdYM9hzGGbLFA2veWZ%2B%2BUIYKDSaj1%2B4mdwvbDJoZY9rdMnd%2BAKHO5lRzmCwSfb8OcRqWFD%2BFjudfSSE5x64KRzBv3XcJzZyOCP9BuH68DliIv6NTsMS0ZTE2JQaWAs4G43xlSZYl6ugOgc6Vi%2B5msWoh4jJq5LvzTh8o7qF6CO68Rtro0aYOltUmUpkG%2BZGANe5nxq3zrq5iTX3YnCCvqLsKq2SGtqu5aP4tV32gSE33Did8itU6slcUDCeusTE6haP0AUD4uM1Hl%2BcoPBpio6Fgo47HZKBN8Uxl9HZ9Hc7KCSbQblqG3ZAAHNHrbde%2FFdWXwBzPwYtG5ZAfZaGeM%2BcjkoaEoRiUZroo7vKaiPg2U36aUvQI%2Fke6dQwoSLOzbA4zSsvpiR8pkdKsm3JSYET5vHJwmyz8jkda%2Bjhqn6GCGnZtbiaZfq1vWkMJFAizj%2FsrVZOi7SJeYgsRo5s9kdXKn88xBvGtEXMyBlDM1pbIlhktz1yaabIVbaik9ZnEw2qTWU8dMMTlZSkV4u20JohHhmZCNF4zvQEB%2FKQe9XIMK%2FSGokg8VB5obhm4vBH%2B9yICR3VSBQnKIOvxYcML2vzMIGOqUBNAJei%2F6QvWrvFl3i5efDWJ6NGvVvEizs6CrJiumTapgn3zlIw84GMyKA%2BQmb%2Brkb%2FQdgHoU02DPAUyTHNvBtoL1f7Ftu6o270aJ6eWC95wTkm517r8m2ytbItjIl77nAdHg6tEUHPNosXp5D6kG6FaxhCeqSurKECgpvxCkNUwl5xYIcTDcSGKaqlJeTYPq32lo3k6XiuNs8%2FLW18yy4ap2%2FwmXT&X-Amz-Signature=e22156e0dbd15090022718888c9c5abc5fca848dd7d161f81242904714779f09&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)\n\nㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㄹ"
     }
   ]
 }
