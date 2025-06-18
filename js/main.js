@@ -216,7 +216,36 @@ function displayPost(post) {
     // 포스트 본문 표시 (마크다운을 HTML로 변환)
     const postBody = document.getElementById('post-body');
     if (postBody) {
-        postBody.innerHTML = formatContent(post.content);
+        console.log('=== 콘텐츠 디버깅 ===');
+        console.log('원본 콘텐츠:', post.content);
+        console.log('콘텐츠 길이:', post.content ? post.content.length : 0);
+        console.log('콘텐츠 타입:', typeof post.content);
+        
+        const formattedContent = formatContent(post.content);
+        console.log('포맷된 콘텐츠:', formattedContent);
+        
+        // 🚨 임시: 콘텐츠가 너무 짧으면 테스트 콘텐츠 추가
+        let finalContent = formattedContent;
+        if (!post.content || post.content.length < 10) {
+            finalContent = `
+                <p><strong>원본 콘텐츠:</strong> ${post.content || '없음'}</p>
+                <p>이것은 테스트 콘텐츠입니다.</p>
+                <h2>테스트 헤딩</h2>
+                <p>노션에서 더 긴 내용을 입력해주세요.</p>
+                <ul>
+                    <li>리스트 아이템 1</li>
+                    <li>리스트 아이템 2</li>
+                </ul>
+            `;
+        }
+        
+        postBody.innerHTML = finalContent;
+        
+        // HTML 삽입 후 실제 DOM 확인
+        console.log('DOM에 삽입된 HTML:', postBody.innerHTML);
+        console.log('postBody 높이:', postBody.offsetHeight);
+        console.log('postBody 스타일:', window.getComputedStyle(postBody));
+        
         console.log('본문 설정 완료');
     } else {
         console.error('post-body 요소를 찾을 수 없습니다.');
@@ -252,12 +281,29 @@ function formatContent(content) {
     // `코드` 텍스트
     html = html.replace(/`(.*?)`/g, '<code>$1</code>');
     
+    // 🖼️ 이미지 ![alt](url) → <img> 태그
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto; margin: 10px 0;">');
+    
     // 링크 [텍스트](URL)
     html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
     
     // 헤딩 ## 텍스트
     html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
     html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    
+    // 코드 블록 ```code```
+    html = html.replace(/```\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>');
+    
+    // 인용문 > text
+    html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+    
+    // 구분선 ---
+    html = html.replace(/^---$/gm, '<hr>');
+    
+    // 리스트 • item
+    html = html.replace(/^• (.*$)/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
     
     // 단락 구분
     html = html.replace(/(<br>\s*){2,}/g, '</p><p>');

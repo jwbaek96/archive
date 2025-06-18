@@ -171,6 +171,66 @@ function blockToText(block) {
         case 'divider':
             return '---';
             
+        // 🖼️ 이미지 블록 처리
+        case 'image':
+            const imageBlock = block.image;
+            let imageUrl = '';
+            let altText = '';
+            
+            // 이미지 URL 추출
+            if (imageBlock.external) {
+                imageUrl = imageBlock.external.url;
+            } else if (imageBlock.file) {
+                imageUrl = imageBlock.file.url;
+            }
+            
+            // 캡션 추출
+            if (imageBlock.caption && imageBlock.caption.length > 0) {
+                altText = imageBlock.caption.map(text => text.plain_text).join('');
+            }
+            
+            console.log(`Found image: ${imageUrl}`);
+            return `![${altText}](${imageUrl})`;
+            
+        // 📹 비디오 블록 처리
+        case 'video':
+            const videoBlock = block.video;
+            let videoUrl = '';
+            
+            if (videoBlock.external) {
+                videoUrl = videoBlock.external.url;
+            } else if (videoBlock.file) {
+                videoUrl = videoBlock.file.url;
+            }
+            
+            console.log(`Found video: ${videoUrl}`);
+            return `[📹 Video](${videoUrl})`;
+            
+        // 📎 파일 블록 처리
+        case 'file':
+            const fileBlock = block.file;
+            let fileUrl = '';
+            let fileName = '';
+            
+            if (fileBlock.external) {
+                fileUrl = fileBlock.external.url;
+            } else if (fileBlock.file) {
+                fileUrl = fileBlock.file.url;
+            }
+            
+            if (fileBlock.caption && fileBlock.caption.length > 0) {
+                fileName = fileBlock.caption.map(text => text.plain_text).join('');
+            }
+            
+            console.log(`Found file: ${fileUrl}`);
+            return `[📎 ${fileName || 'File'}](${fileUrl})`;
+            
+        // 🔗 북마크/링크 블록 처리
+        case 'bookmark':
+            const bookmarkUrl = block.bookmark.url;
+            console.log(`Found bookmark: ${bookmarkUrl}`);
+            return `[🔗 Link](${bookmarkUrl})`;
+            
         default:
             // 알 수 없는 블록 타입의 경우
             console.log(`Unknown block type: ${type}`, block);
