@@ -3,34 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 노션 블로그</title>
+    <title>노션블로그 디자인</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <input id="pop_cbx_me" type="checkbox" class="dpnone">
     <header>
-        <div class="container">
-            <p>헤더</p>
+        <div class="me">
+            <div class="me_pic">
+                <img src="../assets/me4.jpg">
+            </div>
+            <div class="me_info">
+                <span>백종훈</span>
+                <span>Visual Artist · Musician · FE Developer</span>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <div id="loading" class="loading">
-            <p>테스트 중...</p>
+        <div class="m-l"></div>
+        <div class="m-c">
+            <div id="loading" class="loading">
+                <p>테스트 중...</p>
+            </div>
+            <div id="posts-container" class="posts-grid" style="display: none;">
+                <!-- 여기에 블로그 포스트들이 동적으로 추가됩니다 -->
+            </div>
+            <div id="error" class="error" style="display: none;">
+                <p>포스트를 불러올 수 없습니다. 나중에 다시 시도해주세요.</p>
+            </div>
         </div>
-        
-        <div id="posts-container" class="posts-grid" style="display: none;">
-            <!-- 여기에 블로그 포스트들이 동적으로 추가됩니다 -->
-        </div>
+        <div class="m-r"></div>
 
-        <div id="error" class="error" style="display: none;">
-            <p>포스트를 불러올 수 없습니다. 나중에 다시 시도해주세요.</p>
-        </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 내 노션 블로그. Made with Notion API</p>
-        </div>
+        <p>푸터</p>
     </footer>
 
     <script src="js/config.js"></script>
