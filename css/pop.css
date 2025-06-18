@@ -5,7 +5,7 @@
 
 /* me */
 .me{
-    position: fixed;
+    /* position: fixed; */
     top: 40px;left: 90px;
     z-index: 1;
 

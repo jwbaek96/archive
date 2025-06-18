@@ -109,9 +109,14 @@ async function fetchNotionData() {
             fs.mkdirSync(dataDir, { recursive: true });
         }
 
-        // JSON 파일로 저장
+        // JSON 파일로 저장 (객체 형태로 래핑)
+        const jsonData = {
+            lastUpdated: new Date().toISOString(),
+            posts: posts
+        };
+        
         const filePath = path.join(dataDir, 'posts.json');
-        fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
+        fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
         
         console.log(`Successfully saved ${posts.length} posts to ${filePath}`);
         
