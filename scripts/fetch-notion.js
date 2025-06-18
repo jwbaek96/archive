@@ -19,7 +19,6 @@ async function fetchNotionData() {
         // 노션 데이터베이스에서 데이터 가져오기
         const response = await notion.databases.query({
             database_id: databaseId,
-            // Published 필터 제거 - 모든 포스트 가져오기
             sorts: [
                 {
                     property: 'date',
@@ -44,15 +43,38 @@ async function fetchNotionData() {
         }
 
         // 데이터 변환
-        const posts = response.results.map(page => {
+        const posts = [];
+        
+        for (const page of response.results) {
             console.log('Processing page:', page.id);
             console.log('Page properties:', Object.keys(page.properties));
             
-            // Published 속성을 동적으로 찾기
+            // 기본 속성들 처리
+            const basicPost = {
+                id: page.id,
+                title: getPlainText(page.properties.title || page.properties.Title || page.properties['제목']),
+                description: getPlainText(page.properties.description || page.properties.Description || page.properties['설명']),
+                date: (page.properties.date || page.properties.Date || page.properties['날짜'])?.date?.start || '',
+                category: '',
+                tags: (page.properties.tags || page.properties.Tags || page.properties['태그'])?.multi_select?.map(tag => tag.name) || [],
+                published: false,
+                content: '' // 이 부분을 페이지 블록에서 가져올 예정
+            };
+            
+            // 카테고리 처리
+            const categoryProperty = page.properties.category || page.properties.Category || page.properties['카테고리'];
+            if (categoryProperty) {
+                if (categoryProperty.select) {
+                    basicPost.category = categoryProperty.select.name || '';
+                } else if (categoryProperty.multi_select) {
+                    basicPost.category = categoryProperty.multi_select.map(cat => cat.name).join(', ') || '';
+                }
+            }
+            
+            // Published 처리
             let publishedValue = false;
             const publishedCandidates = ['Published', 'published', '공개여부', 'publish', 'Publish'];
             
-            // 먼저 후보 이름들로 시도
             for (const candidate of publishedCandidates) {
                 if (page.properties[candidate] && page.properties[candidate].type === 'checkbox') {
                     publishedValue = page.properties[candidate].checkbox;
@@ -61,45 +83,29 @@ async function fetchNotionData() {
                 }
             }
             
-            // 후보에서 못 찾았으면 모든 체크박스 속성 확인
-            if (!publishedValue) {
-                Object.entries(page.properties).forEach(([key, value]) => {
-                    if (value.type === 'checkbox' && value.checkbox === true) {
-                        console.log(`Found checked checkbox: "${key}" = ${value.checkbox}`);
-                        publishedValue = value.checkbox;
-                    }
+            basicPost.published = publishedValue;
+            
+            // 🔥 페이지 블록 콘텐츠 가져오기
+            try {
+                console.log(`Fetching blocks for page: ${page.id}`);
+                const blocksResponse = await notion.blocks.children.list({
+                    block_id: page.id,
                 });
+                
+                // 블록들을 텍스트로 변환
+                const pageContent = blocksResponse.results.map(block => blockToText(block)).join('\n\n');
+                basicPost.content = pageContent;
+                
+                console.log(`Page content length: ${pageContent.length}`);
+                
+            } catch (blockError) {
+                console.error(`Error fetching blocks for page ${page.id}:`, blockError);
+                basicPost.content = basicPost.description; // 폴백으로 description 사용
             }
             
-            // 카테고리 속성 디버깅
-            const categoryProperty = page.properties.category || page.properties.Category || page.properties['카테고리'];
-            console.log('Category property:', categoryProperty);
-            
-            let category = '';
-            if (categoryProperty) {
-                if (categoryProperty.select) {
-                    // 단일 선택인 경우
-                    category = categoryProperty.select.name || '';
-                } else if (categoryProperty.multi_select) {
-                    // 다중 선택인 경우
-                    category = categoryProperty.multi_select.map(cat => cat.name).join(', ') || '';
-                }
-            }
-            console.log('Processed category:', category);
-            
-            const post = {
-                id: page.id,
-                title: getPlainText(page.properties.title || page.properties.Title || page.properties['제목']),
-                content: getPlainText(page.properties.description || page.properties.Description || page.properties['설명']),
-                date: (page.properties.date || page.properties.Date || page.properties['날짜'])?.date?.start || '',
-                category: category,
-                tags: (page.properties.tags || page.properties.Tags || page.properties['태그'])?.multi_select?.map(tag => tag.name) || [],
-                published: publishedValue
-            };
-            
-            console.log('Processed post:', post);
-            return post;
-        });
+            posts.push(basicPost);
+            console.log('Processed post:', basicPost);
+        }
 
         console.log(`Total posts processed: ${posts.length}`);
 
