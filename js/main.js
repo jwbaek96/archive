@@ -3,8 +3,17 @@ let postsData = [];
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', function() {
-    // 현재 페이지가 메인 페이지인지 확인
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+    // 현재 페이지가 메인 페이지인지 확인 (수정됨)
+    const pathname = window.location.pathname;
+    const isMainPage = pathname.includes('index.html') || 
+                      pathname === '/' || 
+                      pathname.endsWith('/archive/') ||
+                      pathname.endsWith('/');
+    
+    console.log('현재 pathname:', pathname);
+    console.log('메인 페이지인가?', isMainPage);
+    
+    if (isMainPage) {
         loadPosts();
     }
 });
@@ -14,8 +23,7 @@ async function loadPosts() {
     try {
         showLoading();
         
-        // 🔧 GitHub Pages용 경로 (archive 저장소)
-        // const jsonPath = '/archive/data/posts.json';
+        // 🔧 상대 경로 사용
         const jsonPath = './data/posts.json';
         
         console.log('=== 경로 디버깅 ===');
@@ -141,8 +149,7 @@ async function loadPost(postId) {
         console.log('=== 포스트 로딩 시작 ===');
         console.log('요청된 포스트 ID:', postId);
         
-        // 🔧 GitHub Pages용 경로 (archive 저장소)
-        // const jsonPath = '/archive/data/posts.json';
+        // 🔧 상대 경로 사용
         const jsonPath = './data/posts.json';
         
         console.log('JSON 파일 경로:', jsonPath);
