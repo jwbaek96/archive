@@ -131,24 +131,38 @@ async function loadPost(postId) {
     try {
         showLoading();
         
+        console.log('=== 포스트 로딩 시작 ===');
+        console.log('요청된 포스트 ID:', postId);
+        
         const response = await fetch('data/posts.json');
         if (!response.ok) {
             throw new Error('포스트 데이터를 불러올 수 없습니다.');
         }
         
         const data = await response.json();
-        const post = data.posts.find(p => p.id === postId);
+        
+        // 🔧 JSON 구조에 따라 다르게 처리
+        const posts = Array.isArray(data) ? data : (data.posts || []);
+        
+        console.log('전체 포스트 개수:', posts.length);
+        console.log('전체 포스트 목록:', posts.map(p => ({ id: p.id, title: p.title })));
+        
+        const post = posts.find(p => p.id === postId);
+        
+        console.log('찾은 포스트:', post);
         
         if (!post) {
+            console.error('포스트를 찾을 수 없습니다. ID:', postId);
             throw new Error('포스트를 찾을 수 없습니다.');
         }
         
         // Published 체크를 더 관대하게 (임시)
-        if (post.published !== true) {
-            console.log(`포스트 "${post.title}"의 published 값:`, post.published);
-            // throw new Error('공개되지 않은 포스트입니다.');
+        if (!post.published) {
+            console.log(`⚠️ 포스트 "${post.title}"의 published 값:`, post.published);
+            // 일단 표시하되 경고만 출력
         }
         
+        console.log('포스트 표시 시작');
         displayPost(post);
         hideLoading();
         
@@ -160,28 +174,64 @@ async function loadPost(postId) {
 
 // 개별 포스트 표시
 function displayPost(post) {
+    console.log('=== 포스트 표시 시작 ===');
+    console.log('표시할 포스트:', post);
+    
     // 페이지 제목 설정
     document.title = `${post.title} - ${CONFIG.BLOG_TITLE}`;
-    document.getElementById('post-title').textContent = post.title;
+    
+    // post-title 요소가 있으면 설정
+    const postTitleEl = document.getElementById('post-title');
+    if (postTitleEl) {
+        postTitleEl.textContent = post.title;
+    }
     
     // 포스트 내용 표시
-    document.getElementById('post-title-main').textContent = post.title;
-    document.getElementById('post-date').textContent = utils.formatDate(post.date);
+    const postTitleMainEl = document.getElementById('post-title-main');
+    const postDateEl = document.getElementById('post-date');
+    
+    if (postTitleMainEl) {
+        postTitleMainEl.textContent = post.title;
+        console.log('제목 설정 완료:', post.title);
+    } else {
+        console.error('post-title-main 요소를 찾을 수 없습니다.');
+    }
+    
+    if (postDateEl) {
+        postDateEl.textContent = utils.formatDate(post.date);
+        console.log('날짜 설정 완료:', post.date);
+    } else {
+        console.error('post-date 요소를 찾을 수 없습니다.');
+    }
     
     // 태그 표시
     const tagsContainer = document.getElementById('post-tags');
-    if (post.tags && post.tags.length > 0) {
+    if (tagsContainer && post.tags && post.tags.length > 0) {
         tagsContainer.innerHTML = post.tags.map((tag, index) => 
             `<span class="tag" style="background-color: ${utils.getTagColor(index)}">${tag}</span>`
         ).join('');
+        console.log('태그 설정 완료:', post.tags);
     }
     
     // 포스트 본문 표시 (마크다운을 HTML로 변환)
     const postBody = document.getElementById('post-body');
-    postBody.innerHTML = formatContent(post.content);
+    if (postBody) {
+        postBody.innerHTML = formatContent(post.content);
+        console.log('본문 설정 완료');
+    } else {
+        console.error('post-body 요소를 찾을 수 없습니다.');
+    }
     
     // 포스트 표시
-    document.getElementById('post-content').style.display = 'block';
+    const postContent = document.getElementById('post-content');
+    if (postContent) {
+        postContent.style.display = 'block';
+        console.log('포스트 콘텐츠 표시 완료');
+    } else {
+        console.error('post-content 요소를 찾을 수 없습니다.');
+    }
+    
+    console.log('=== 포스트 표시 완료 ===');
 }
 
 // 콘텐츠 포맷팅 (간단한 마크다운 지원)
