@@ -15,7 +15,8 @@ async function loadPosts() {
         showLoading();
         
         // 🔧 GitHub Pages용 경로 (archive 저장소)
-        const jsonPath = '/archive/data/posts.json';
+        // const jsonPath = '/archive/data/posts.json';
+        const jsonPath = './data/posts.json';
         
         console.log('=== 경로 디버깅 ===');
         console.log('현재 URL:', window.location.href);
@@ -141,7 +142,8 @@ async function loadPost(postId) {
         console.log('요청된 포스트 ID:', postId);
         
         // 🔧 GitHub Pages용 경로 (archive 저장소)
-        const jsonPath = '/archive/data/posts.json';
+        // const jsonPath = '/archive/data/posts.json';
+        const jsonPath = './data/posts.json';
         
         console.log('JSON 파일 경로:', jsonPath);
         
